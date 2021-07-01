@@ -6,18 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Weather</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pe-icon-set-weather/css/pe-icon-set-weather.css">
+    <link rel="stylesheet" href="pe-icon-set-weather/css/helper.css">
 </head>
 <body>
-    <h1>Random Weather</h1>
-    <div class="container">
-        <h3 id="date">Time, Day, Month, Year</h3>
-        <h3 id="location">Location</h3>
-        <img class="weatherImg" href="">
-        <h1 id="weatherType">Sunny</h1>
-        <h1 id="temperature">32</h1>
-        <span id="precipitation">0%</span>
-        <span id="humidity">50%</span>
-        <span id="wind">1mph</span>
+    <h1 class="headText">Random Weather</h1>
+    <div class="main-container">
+        <div class="container1">
+            <h3 id="date">Time, Day, Month, Year</h3>
+            <h3 id="location">Location</h3>
+            <span class="weatherImg pe-is-w-sun-1 pe-5x"></span>
+            <h1 id="weatherType">Sunny</h1>
+            <h1 id="temperature">32 F</h1>
+        </div>
+        <div class="container2">
+            <span id="precipitation">0% Precipitation</span>
+            <span id="humidity">50% Humidity</span>
+            <span id="wind">1mph Wind</span>
+        </div>
         <div class="daysContainer">
             <ul id="weatherWeek">
                 <li class="daySelection">

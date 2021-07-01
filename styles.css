@@ -1,3 +1,45 @@
-.container {
-    background-color: turquoise;
+body {
+    background: linear-gradient(90deg, rgba(147,121,162,1) 0%, rgba(48,39,222,1) 51%, rgba(0,212,255,1) 100%);
+}
+.headText {
+    text-align: center;
+    color: cyan;
+}
+.main-container {
+    margin: 0 auto;
+    width: 75%;
+    background: linear-gradient(90deg, rgba(21,224,154,1) 0%, rgba(39,218,222,1) 51%, rgba(0,212,255,1) 100%);
+}
+.container1{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.container2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.daysContainer {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    list-style-type: none;
+    flex-wrap: nowrap;
+}
+
+li {
+    display: inline-block;
+    padding: 0px 20px;
+    text-align: center;
 }
