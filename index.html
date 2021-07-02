@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="pe-icon-set-weather/css/helper.css">
 </head>
 <body>
-    <h1 class="headText">Random Weather</h1>
+    <header></header>
+        <h1 class="headText">Random Weather</h1>
+        <div class="hamMenu"></div>
+    </header>
     <div class="main-container">
         <div class="container1">
             <h3 id="date">Time, Day, Month, Year</h3>
@@ -20,57 +23,57 @@
             <h1 id="temperature">32 F</h1>
         </div>
         <div class="container2">
-            <span id="precipitation">0% Precipitation</span>
-            <span id="humidity">50% Humidity</span>
-            <span id="wind">1mph Wind</span>
+            <span id="precipitation" class="weatherImg pe-is-w-drop-percentage pe-3x"> 0%</span>
+            <span id="humidity" class="weatherImg pe-is-w-mist pe-3x"> 50%</span>
+            <span id="wind" class="weatherImg pe-is-w-wind pe-3x"> 5mph</span>
         </div>
         <div class="daysContainer">
             <ul id="weatherWeek">
-                <li class="daySelection">
+                <li id ="day1" class="daySelection">
                     <h4 class="daysText">Monday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day2" class="daySelection">
                     <h4 class="daysText">Tuesday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day3" class="daySelection">
                     <h4 class="daysText">Wednesday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day4" class="daySelection">
                     <h4 class="daysText">Thursday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day5" class="daySelection">
                     <h4 class="daysText">Friday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day6" class="daySelection">
                     <h4 class="daysText">Saturday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day7" class="daySelection">
                     <h4 class="daysText">Sunday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
-                <li class="daySelection">
+                <li id ="day8" class="daySelection">
                     <h4 class="daysText">Monday</h4>
-                    <img class="weatherImg">
+                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
                     <span class="highest">90</span>
                     <span class="lowest">60</span>
                 </li>
