@@ -2,8 +2,19 @@ body {
     background: linear-gradient(90deg, rgba(147,121,162,1) 0%, rgba(48,39,222,1) 51%, rgba(0,212,255,1) 100%);
 }
 
+.hidden {
+    display: none;
+}
+
 .headText {
     text-align: center;
+    color: cyan;
+}
+
+#loadingMsg {
+    text-align: center;
+    font-size: 50px;
+    padding: 20%;
     color: cyan;
 }
 
@@ -57,4 +68,10 @@ li {
     padding: 0px 20px;
     display: block;
     text-align: center;
+}
+
+@media (max-width: 380px) {
+    .container2 {
+        /**/
+    }
 }
