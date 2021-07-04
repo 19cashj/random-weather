@@ -1,5 +1,7 @@
 body {
     background: linear-gradient(90deg, rgba(147,121,162,1) 0%, rgba(48,39,222,1) 51%, rgba(0,212,255,1) 100%);
+    padding: 0;
+    margin: 0;
 }
 
 .hidden {
@@ -9,6 +11,73 @@ body {
 .headText {
     text-align: center;
     color: cyan;
+}
+
+#headPlaceHolder {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+}
+
+#hamMenu {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+}
+
+#hamClose {
+    background-color: rgba(39,218,222,1);
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    float: right;
+}
+
+#hamUI {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21,224,154,0.9);
+    position: fixed;
+    transform: translateY(-1);
+}
+
+.hamAnimateStart {
+    animation-name: hamSlide;
+    animation-duration: 1.5s;
+}
+
+.hamAnimateBack {
+    animation-name: hamSlideBack;
+    animation-duration: 0.5s;
+}
+
+#hamList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#hamList > li {
+    background-color: rgba(39,218,222,1);
+    border-radius: 5%;
+    padding: 30px 30px;
+    margin-right: 80px;
+}
+
+#hamList > li:hover {
+    background-color: seashell;
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #loadingMsg {
@@ -70,8 +139,24 @@ li {
     text-align: center;
 }
 
-@media (max-width: 380px) {
-    .container2 {
-        /**/
+@keyframes hamSlide {
+    from {
+        transform: translateY(-100%);
+        background-color: rgba(21,224,154,0.2);
+    }
+    to {
+        transform: translateY(1);
+        background-color: rgba(21,224,154,0.9);
+    }
+}
+
+@keyframes hamSlideBack {
+    from {
+        transform: translateX(1);
+        background-color: rgba(21,224,154,0.9);
+    }
+    to {
+        transform: translateX(100%);
+        background-color: rgba(21,224,154,0.2);
     }
 }

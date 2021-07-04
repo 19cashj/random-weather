@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="pe-icon-set-weather/css/helper.css">
 </head>
 <body>
-    <header></header>
+    <div id="hamUI" class="hidden">
+        <div id="hamClose" onclick='hamUIAnimate(2)'></div>
+        <ul id="hamList">
+            <li><div id="ham1" onclick="geolocate()">Update Weather</div></li>
+            <li><div id="ham2" onclick="">Change Units</div></li>
+            <li><div id="ham3" onclick="">Toggle Humidity/Wind</div></li>
+            <li><div id="ham4" onclick="">Toggle Hourly Clock</div></li>
+            <li><div id="ham5" onclick="">Toggle Weekly Forecast</div></li>
+        </ul>
+    </div>
+    <header>
+        <div id="headPlaceHolder"></div>
         <h1 class="headText">Random Weather</h1>
-        <div class="hamMenu"></div>
+        <div id="hamMenu" onclick='hamUIAnimate(1)'></div>
     </header>
     <h2 id="loadingMsg">Please Allow Location</h2>
     <div class="main-container hidden">
@@ -32,50 +43,42 @@
                 <li id ="day1" class="daySelection">
                     <h4 class="daysText">Monday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day2" class="daySelection">
                     <h4 class="daysText">Tuesday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day3" class="daySelection">
                     <h4 class="daysText">Wednesday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day4" class="daySelection">
                     <h4 class="daysText">Thursday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day5" class="daySelection">
                     <h4 class="daysText">Friday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day6" class="daySelection">
                     <h4 class="daysText">Saturday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day7" class="daySelection">
                     <h4 class="daysText">Sunday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
                 <li id ="day8" class="daySelection">
                     <h4 class="daysText">Monday</h4>
                     <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highest">90</span>
-                    <span class="lowest">60</span>
+                    <span class="highLow">90</span>
                 </li>
             </ul>
         </div>
