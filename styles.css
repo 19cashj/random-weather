@@ -20,63 +20,6 @@ body {
     min-width: 50px;
 }
 
-#hamMenu {
-    background-color: black;
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-}
-
-#hamClose {
-    background-color: rgba(39,218,222,1);
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    float: right;
-}
-
-#hamUI {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(21,224,154,0.9);
-    position: fixed;
-    transform: translateY(-1);
-    z-index: 200;
-}
-
-.hamAnimateStart {
-    animation-name: hamSlide;
-    animation-duration: 1.5s;
-}
-
-.hamAnimateBack {
-    animation-name: hamSlideBack;
-    animation-duration: 0.5s;
-}
-
-#hamList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    min-width: 100vw;
-}
-
-#hamList > li {
-    background-color: rgba(39,218,222,1);
-    border-radius: 5%;
-    padding: 30px 30px;
-    margin-right: 80px;
-    margin-bottom: 100px;
-}
-
-#hamList > li:hover {
-    background-color: seashell;
-    cursor: pointer;
-}
-
 header {
     display: flex;
     justify-content: space-around;
@@ -167,6 +110,75 @@ li {
     text-align: center;
 }
 
+#hamList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#hamList > li {
+    background-color: rgba(39,218,222,1);
+    border-radius: 5%;
+    padding: 30px 30px;
+    margin-right: 80px;
+    margin-bottom: 50px;
+}
+
+#hamList > li:hover {
+    background-color: seashell;
+    cursor: pointer;
+}
+
+#hamMenu {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+}
+
+#hamClose {
+    background-color: rgba(39,218,222,1);
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    float: right;
+}
+
+#hamUI {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21,224,154,0.9);
+    position: fixed;
+    transform: translateY(-1);
+    z-index: 200;
+}
+
+.hamAnimateStart {
+    animation-name: hamSlide;
+    animation-duration: 1.5s;
+}
+
+.hamAnimateBack {
+    animation-name: hamSlideBack;
+    animation-duration: 0.5s;
+}
+
+@media (max-width: 687px) {
+    .topContainer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 444px) {
+    .hourlyClock {
+        display: none;
+    }
+}
+
 @keyframes hamSlide {
     from {
         transform: translateY(-100%);
@@ -195,7 +207,7 @@ li {
     z-index: 1;
 }
 
-#h_12 {
+#h_0 {
     margin-top: 1px;
     margin-left: 145px;
 }
