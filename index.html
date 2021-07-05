@@ -13,11 +13,10 @@
     <div id="hamUI" class="hidden">
         <div id="hamClose" onclick='hamUIAnimate(2)'></div>
         <ul id="hamList">
-            <li><div id="ham1" onclick="geolocate()">Update Weather</div></li>
-            <li><div id="ham2" onclick="">Change Units</div></li>
-            <li><div id="ham3" onclick="">Toggle Humidity/Wind</div></li>
-            <li><div id="ham4" onclick="">Toggle Hourly Clock</div></li>
-            <li><div id="ham5" onclick="">Toggle Weekly Forecast</div></li>
+            <li><div id="ham1" onclick="">Change Units</div></li>
+            <li><div id="ham2" onclick="">Toggle Humidity/Wind</div></li>
+            <li><div id="ham3" onclick=''>Toggle Hourly Clock</div></li>
+            <li><div id="ham4" onclick="">Toggle Weekly Forecast</div></li>
         </ul>
     </div>
     <header>
@@ -27,58 +26,75 @@
     </header>
     <h2 id="loadingMsg">Please Allow Location</h2>
     <div class="main-container hidden">
-        <div class="container1">
-            <h3 id="date">Time, Day, Month, Year</h3>
-            <h3 id="location">Location</h3>
-            <span class="weatherImg pe-5x"></span>
-            <h1 id="weatherType">Sunny</h1>
-            <h1 id="temperature">32 F</h1>
+        <h3 id="date">Time, Day, Month, Year</h3>
+        <h3 id="location">Location</h3>
+        <div class="topContainer">
+            <div class="container1">
+                <span class="weatherImg pe-5x"></span>
+                <h1 id="weatherType">placeholder</h1>
+                <h1 id="temperature">placeholder</h1>
+            </div>
+            <div class="hourlyClock">
+                <span id="h_12" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_1" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_2" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_3" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_4" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_5" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_6" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_7" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_8" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_9" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_10" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <span id="h_11" class="hour pe-is-w-sun-1 pe-2x"></span>
+                <canvas id="clockCanvas" height="250px" width="250px"></canvas>
+            </div>
         </div>
         <div class="container2">
-            <span id="humidity" class="weatherImg pe-is-w-mist pe-3x"> 50%</span>
-            <span id="wind" class="weatherImg pe-is-w-wind pe-3x"> 5mph</span>
+            <span id="humidity" class="weatherImg pe-is-w-mist pe-3x">placeholder</span>
+            <span id="wind" class="weatherImg pe-is-w-wind pe-3x">placeholder</span>
         </div>
         <div class="daysContainer">
             <ul id="weatherWeek">
                 <li id ="day1" class="daySelection">
-                    <h4 class="daysText">Monday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day2" class="daySelection">
-                    <h4 class="daysText">Tuesday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day3" class="daySelection">
-                    <h4 class="daysText">Wednesday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day4" class="daySelection">
-                    <h4 class="daysText">Thursday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day5" class="daySelection">
-                    <h4 class="daysText">Friday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day6" class="daySelection">
-                    <h4 class="daysText">Saturday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day7" class="daySelection">
-                    <h4 class="daysText">Sunday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
                 <li id ="day8" class="daySelection">
-                    <h4 class="daysText">Monday</h4>
-                    <span class="weatherImg pe-is-w-sun-1 pe-2x"></span>
-                    <span class="highLow">90</span>
+                    <h4 class="daysText"></h4>
+                    <span class="weeklyWeatherImg pe-2x"></span>
+                    <span class="highLow"></span>
                 </li>
             </ul>
         </div>
