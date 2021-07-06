@@ -48,13 +48,12 @@ function setMainData(weatherData, currentDate, locationName) {
     const humidity = document.getElementById("humidity");
     const wind = document.getElementById("wind");
     date.textContent = currentDate;
-    //
     temperature.textContent = `${Math.round(weatherData.current.temp)}° F`;
     location.textContent = `${locationName[0].name}`;
     weatherType.textContent = `${weatherData.current.weather[0].description}`;
     humidity.textContent = ` ${weatherData.current.humidity}%`;
     wind.textContent = ` ${Math.round(weatherData.current.wind_speed)}mph`;
-    iconSelector(weatherData.current.weather[0].main, weatherImg1, currentDate.getHours());
+    iconSelector(weatherData.current.weather[0].main, weatherImg1, weatherData.current.weather[0].description, currentDate.getHours());
 }
 
 function setWeeklyForecast(weatherData, currentDay) {
@@ -67,23 +66,58 @@ function setWeeklyForecast(weatherData, currentDay) {
         }
         daysText[i].textContent = daysObject[j];
         daysTemp[i].textContent = `${Math.round(weatherData.daily[i].temp.max)}°/${Math.round(weatherData.daily[i].temp.min)}°`;
-        iconSelector(weatherData.daily[i].weather[0].main, daysImg[i]);
+        iconSelector(weatherData.daily[i].weather[0].main, daysImg[i], weatherData.daily[i].weather[0].description);
     }
 }
 
-function iconSelector(weatherDesc, img, currentHour) {
+function iconSelector(weatherDesc, img, extraWeatherDesc, currentHour) {
     switch (weatherDesc) {
         case "Thunderstorm":
-            img.add("pe-is-w-mix-rainfall-2");
+            if (extraWeatherDesc = extraWeatherDesc == "thunderstorm with light rain" || extraWeatherDesc == "light thunderstorm" || extraWeatherDesc == "thunderstorm with light drizzle") {
+                img.add("pe-is-w-mix-rainfall-1");
+            }
+            else if (extraWeatherDesc = "thunderstorm with heavy rain" || extraWeatherDesc == "thunderstorm with rain" || extraWeatherDesc == "thunderstorm with drizzle" || extraWeatherDesc == "thunderstorm with heavy drizzle") {
+                img.add("pe-is-w-mix-rainfall-2");
+            }
+            else if (extraWeatherDesc = "thunderstorm" || extraWeatherDesc == "ragged thunderstorm") {
+                img.add("pe-is-w-thunderstorm")
+            }
+            else if (extraWeatherDesc = "heavy thunderstorm") {
+                img.add("pe-is-w-severe-thunderstorm");
+            }
             break;
         case "Drizzle":
-            img.classList.add("pe-is-w-drizzle");
+            if (extraWeatherDesc = "heavy intensity drizzle" || extraWeatherDesc == "heavy intensity drizzle rain" || extraWeatherDesc == "heavy shower rain and drizzle") {
+                img.add("pe-is-w-heavy-rain-2");
+            }
+            else {
+                img.add("pe-is-w-drizzle");
+            }
             break;
         case "Rain":
-            img.classList.add("pe-is-w-rain-1");
+            if (extraWeatherDesc == "moderate rain" || extraWeatherDesc == "shower rain") {
+                img.classList.add("pe-is-w-heavy-rain-2");
+            }
+            else if (extraWeatherDesc == "light rain" || extraWeatherDesc == "light intensity shower rain" || extraWeatherDesc == "ragged shower rain") {
+                img.classList.add("pe-is-w-drizzle");
+            }
+            else if (extraWeatherDesc == "heavy intensity rain" || extraWeatherDesc == "very heavy rain" || extraWeatherDesc == "extreme rain" || extraWeatherDesc == "heavy intensity shower rain") {
+                img.classList.add("pe-is-w-heavy-rain-1");
+            }
+            else if (extraWeatherDesc == "freezing rain") {
+                img.classList.add("pe-is-w-heavy-hail");
+            }
             break;
         case "Snow":
-            img.classList.add("pe-is-w-snow");
+            if (extraWeatherDesc == "light shower sleet" || extraWeatherDesc == "shower sleet" || extraWeatherDesc == "sleet") {
+                img.classList.add("pe-is-w-heavy-hail");
+            }
+            else if (extraWeatherDesc == "light rain and snow" || extraWeatherDesc == "rain and snow") {
+                img.classList.add("pe-is-w-rain-and-snow");
+            }
+            else {
+                img.classList.add("pe-is-w-snow");
+            }
             break;
         case "Mist":
         case "Smoke":
@@ -102,7 +136,7 @@ function iconSelector(weatherDesc, img, currentHour) {
             break;
         case "Clear":
             if (currentHour < 6 || currentHour > 19) {
-                img.classList.add("pe-is-w-moon-2");
+                img.classList.add("pe-is-w-moon-1");
             }
             else {
                 img.classList.add("pe-is-w-sun-1");
@@ -110,7 +144,20 @@ function iconSelector(weatherDesc, img, currentHour) {
             }
             break;
         case "Clouds":
-            img.classList.add("pe-is-w-mostly-cloudy-1");
+            if (extraWeatherDesc == "few clouds" || extraWeatherDesc == "scattered clouds") {
+                if (currentHour < 6 || currentHour > 19) {
+                    img.classList.add("pe-is-w-partly-cloudy-3");
+                }
+                else {
+                    img.classList.add("pe-is-w-partly-cloudy-1");
+                }
+            }
+            else if (extraWeatherDesc == "broken clouds") {
+                img.classList.add("pe-is-w-mostly-cloudy-2")
+            }
+            else if (extraWeatherDesc == "overcast clouds") {
+                img.classList.add("pe-is-w-mostly-cloudy-1")
+            }
             break;
     }
 }
@@ -132,8 +179,9 @@ function hamUIAnimate(state) {
 function initialClockDraw() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillRect(115, 115, 20, 20);
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2;
     ctx.strokeStyle = "black";
+
     ctx.beginPath();
     ctx.moveTo(125,250);
     ctx.lineTo(125,0);
@@ -168,6 +216,7 @@ function initialClockDraw() {
 function setClock(weatherData, currentHour) {
     const hourIcons = document.getElementsByClassName("hour");
     let currentHourHand = 0;
+    const realCurrentHour = currentHour;
     if (currentHour < 12) {
         currentHourHand = currentHour;
     }
@@ -179,11 +228,11 @@ function setClock(weatherData, currentHour) {
         if (j>11) {
             j=0;
         }
-        iconSelector(weatherData.hourly[i].weather[0].main, hourIcons[j]);
+        iconSelector(weatherData.hourly[i].weather[0].main, hourIcons[j], weatherData.hourly[i].weather[0].description, realCurrentHour);
     }
     //
     const hourHands = {0:[125,0],1:[188,0],2:[250,62],3:[250,125],4:[250,188],5:[188,250],6:[125,250],7:[62,250],8:[0,188],9:[0,125],10:[0,62],11:[62,0]};
-    ctx.lineWidth = 20;
+    ctx.lineWidth = 10;
     ctx.strokeStyle = "black";
     ctx.beginPath();
     ctx.moveTo(125,125);
@@ -198,5 +247,5 @@ function hideHumidityWind() {
 geolocate();
 initialClockDraw();
     //Add if statements in cases for checking time of day to set the icon to the moon/sun and if statements to check weather description and set icons
-    //Fill in colors on both sides of the hour hand for the weather clock to differentiate AM and PM such as filling in RED/BLUE for the icons before and after the current hour
     //Add alerts using data from the weather api
+    //Use more features from the icon pack such as thermometer icons next to temperature

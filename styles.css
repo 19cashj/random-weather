@@ -68,7 +68,7 @@ header {
 }
 
 canvas {
-    border: black solid 1px;
+    border: black solid 2px;
     margin-left: 35px;
     margin-top: 35px;
     border-radius: 50%;
@@ -167,7 +167,7 @@ li {
     animation-duration: 0.5s;
 }
 
-@media (max-width: 687px) {
+@media (max-width: 758px) {
     .topContainer {
         flex-direction: column;
     }
@@ -175,6 +175,12 @@ li {
 
 @media (max-width: 444px) {
     .hourlyClock {
+        display: none;
+    }
+}
+
+@media (max-width: 358px) {
+    .container2 {
         display: none;
     }
 }
