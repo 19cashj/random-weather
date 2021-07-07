@@ -161,20 +161,6 @@ function iconSelector(weatherDesc, img, extraWeatherDesc, currentHour) {
             break;
     }
 }
-function hamUIAnimate(state) {
-    if (state == 1) {
-        document.getElementById("hamUI").classList.remove("hamAnimateBack");
-        document.getElementById("hamUI").classList.remove("hidden");
-        document.getElementById("hamUI").classList.add("hamAnimateStart");
-    }
-    else {
-        document.getElementById("hamUI").classList.remove("hamAnimateStart");
-        document.getElementById("hamUI").classList.add("hamAnimateBack");
-        setTimeout(() => {
-            document.getElementById("hamUI").classList.add("hidden");
-        }, 400);
-    }
-}
 
 function initialClockDraw() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -230,7 +216,6 @@ function setClock(weatherData, currentHour) {
         }
         iconSelector(weatherData.hourly[i].weather[0].main, hourIcons[j], weatherData.hourly[i].weather[0].description, realCurrentHour);
     }
-    //
     const hourHands = {0:[125,0],1:[188,0],2:[250,62],3:[250,125],4:[250,188],5:[188,250],6:[125,250],7:[62,250],8:[0,188],9:[0,125],10:[0,62],11:[62,0]};
     ctx.lineWidth = 10;
     ctx.strokeStyle = "black";
@@ -240,12 +225,8 @@ function setClock(weatherData, currentHour) {
     ctx.stroke();
 }
 
-function hideHumidityWind() {
-    //document.querySelector(".container2").classList.add("hidden");
-}
-
 geolocate();
 initialClockDraw();
-    //Add if statements in cases for checking time of day to set the icon to the moon/sun and if statements to check weather description and set icons
+    //Fix setting the time of day for hours on the weather clock to set the icons
     //Add alerts using data from the weather api
     //Use more features from the icon pack such as thermometer icons next to temperature
