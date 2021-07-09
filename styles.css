@@ -14,12 +14,6 @@ body {
     color: cyan;
 }
 
-#headPlaceHolder {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-}
-
 header {
     display: flex;
     justify-content: space-around;
@@ -31,6 +25,21 @@ header {
     font-size: 50px;
     padding: 20%;
     color: cyan;
+}
+
+#alerts {
+    position: absolute;
+    margin-left: 65%;
+}
+
+#alertsUI {
+    background-color: aquamarine;
+    width: 40%;
+    height: 500px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 10;
+    margin-left: 18%;
 }
 
 .main-container {

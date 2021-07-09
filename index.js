@@ -3,8 +3,11 @@ const mainContainer = document.querySelector(".main-container");
 const weatherImg1 = document.getElementsByClassName("weatherImg")[0];
 const weatherType = document.getElementById("weatherType");
 const canvas = document.getElementById("clockCanvas");
+const alertIcon = document.getElementById("alerts");
+const alertsUI = document.getElementById("alertsUI");
 const ctx = canvas.getContext(`2d`);
 const currentDate = new Date();
+let iconInterval;
 const daysObject = {
     0:"Sunday",
     1:"Monday",
@@ -20,10 +23,8 @@ function geolocate() {
 async function setCoords(position) {
     let lat = position.coords.latitude;
     let log = position.coords.longitude;
-    console.log(`Geolocated with Latitude: ${lat} Longitude: ${log}`)
-    console.log("Fetching data from Openweathermap...")
     const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${log}&exclude=minutely&units=imperial&appid=943f1223b9996ecae3cb1fe9233e975b`);
-    const response2 = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${log}&limit=1&appid=943f1223b9996ecae3cb1fe9233e975b`)
+    const response2 = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${log}&limit=1&appid=943f1223b9996ecae3cb1fe9233e975b`)
     if (!response.ok) {
         loadingMsg.innerText = (`Error ${response.status}`);
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,6 +37,7 @@ async function setCoords(position) {
         setMainData(weatherData, currentDate, locationName);
         setWeeklyForecast(weatherData, currentDate.getDay());
         setClock(weatherData, currentDate.getHours());
+        setAlerts(weatherData);
     }
 }
 
@@ -225,8 +227,41 @@ function setClock(weatherData, currentHour) {
     ctx.stroke();
 }
 
+function setAlerts(weatherData) {
+    while (alertsUI.firstChild) {
+        alertsUI.removeChild(alertsUI.firstChild);
+    }
+    for (i = 0; i<weatherData.alerts.length; i++) {
+        let alertHead = document.createElement("h3");
+        let alertDesc = document.createElement("p");
+        let headText = document.createTextNode(`${weatherData.alerts[i].event}`)
+        let alertText = document.createTextNode(`${weatherData.alerts[i].sender_name}: ${weatherData.alerts[i].description}`)
+        alertHead.appendChild(headText);
+        alertsUI.appendChild(alertHead);
+        alertDesc.appendChild(alertText);
+        alertsUI.appendChild(alertDesc);
+    };
+    if (typeof weatherData.alerts[0] != undefined) {
+        alertIcon.classList.remove("hidden");
+        iconInterval = setInterval(() => {
+            setTimeout(() => {
+                alertIcon.classList.toggle("pe-is-w-wind-cone")
+                alertIcon.classList.toggle("pe-is-w-wind-cone-f")
+            }, 500);
+            setTimeout(() => {
+                alertIcon.classList.toggle("pe-is-w-wind-cone-f")
+                alertIcon.classList.toggle("pe-is-w-wind-cone")
+            }, 1000);
+        }, 2000);
+    }
+}
+
+function showAlerts() {
+    clearInterval(iconInterval);
+    alertsUI.classList.toggle("hidden");
+}
+
 geolocate();
 initialClockDraw();
     //Fix setting the time of day for hours on the weather clock to set the icons
     //Add alerts using data from the weather api
-    //Use more features from the icon pack such as thermometer icons next to temperature
