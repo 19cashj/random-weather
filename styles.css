@@ -30,6 +30,7 @@ header {
 #alerts {
     position: absolute;
     margin-left: 65%;
+    cursor: pointer;
 }
 
 #alertsUI {

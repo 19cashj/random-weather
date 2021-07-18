@@ -18,7 +18,7 @@ const daysObject = {
     6:"Saturday"
 }
 function geolocate() {
-    navigator.geolocation.watchPosition(setCoords);
+    navigator.geolocation.getCurrentPosition(setCoords);
 }
 async function setCoords(position) {
     let lat = position.coords.latitude;
@@ -37,13 +37,13 @@ async function setCoords(position) {
         setMainData(weatherData, currentDate, locationName);
         setWeeklyForecast(weatherData, currentDate.getDay());
         setClock(weatherData, currentDate.getHours());
-        setAlerts(weatherData);
+        if (typeof weatherData.alerts != undefined) {
+            setAlerts(weatherData);
+        }
     }
 }
 
 function setMainData(weatherData, currentDate, locationName) {
-    console.log(weatherData);
-    console.log(locationName);
     const date = document.getElementById("date");
     const location = document.getElementById("location");
     const temperature = document.getElementById("temperature");
@@ -228,6 +228,7 @@ function setClock(weatherData, currentHour) {
 }
 
 function setAlerts(weatherData) {
+    clearInterval(iconInterval);
     while (alertsUI.firstChild) {
         alertsUI.removeChild(alertsUI.firstChild);
     }
@@ -241,19 +242,17 @@ function setAlerts(weatherData) {
         alertDesc.appendChild(alertText);
         alertsUI.appendChild(alertDesc);
     };
-    if (typeof weatherData.alerts[0] != undefined) {
-        alertIcon.classList.remove("hidden");
-        iconInterval = setInterval(() => {
-            setTimeout(() => {
-                alertIcon.classList.toggle("pe-is-w-wind-cone")
-                alertIcon.classList.toggle("pe-is-w-wind-cone-f")
-            }, 500);
-            setTimeout(() => {
-                alertIcon.classList.toggle("pe-is-w-wind-cone-f")
-                alertIcon.classList.toggle("pe-is-w-wind-cone")
-            }, 1000);
-        }, 2000);
-    }
+    alertIcon.classList.remove("hidden");
+    iconInterval = setInterval(() => {
+        setTimeout(() => {
+            alertIcon.classList.toggle("pe-is-w-wind-cone")
+            alertIcon.classList.toggle("pe-is-w-wind-cone-f")
+        }, 500);
+        setTimeout(() => {
+            alertIcon.classList.toggle("pe-is-w-wind-cone-f")
+            alertIcon.classList.toggle("pe-is-w-wind-cone")
+        }, 1000);
+    }, 2000);
 }
 
 function showAlerts() {
@@ -264,4 +263,3 @@ function showAlerts() {
 geolocate();
 initialClockDraw();
     //Fix setting the time of day for hours on the weather clock to set the icons
-    //Add alerts using data from the weather api
