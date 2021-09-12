@@ -17,9 +17,47 @@ const daysObject = {
     5:"Friday",
     6:"Saturday"
 }
-function geolocate() {
+
+    //Geolocate
     navigator.geolocation.getCurrentPosition(setCoords);
-}
+    console.log('Retrieving location...')
+
+    //Draw the clock lines in canvas
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillRect(115, 115, 20, 20);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+
+    ctx.beginPath();
+    ctx.moveTo(125,250);
+    ctx.lineTo(125,0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0,125);
+    ctx.lineTo(250,125);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0,62);
+    ctx.lineTo(250,188);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(62,0);
+    ctx.lineTo(188,250);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(188,0);
+    ctx.lineTo(62,250);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0,188);
+    ctx.lineTo(250,62);
+    ctx.stroke();
+
 async function setCoords(position) {
     let lat = position.coords.latitude;
     let log = position.coords.longitude;
@@ -37,7 +75,7 @@ async function setCoords(position) {
         setMainData(weatherData, currentDate, locationName);
         setWeeklyForecast(weatherData, currentDate.getDay());
         setClock(weatherData, currentDate.getHours());
-        if (typeof weatherData.alerts != undefined) {
+        if (weatherData.alerts) {
             setAlerts(weatherData);
         }
     }
@@ -164,43 +202,6 @@ function iconSelector(weatherDesc, img, extraWeatherDesc, currentHour) {
     }
 }
 
-function initialClockDraw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillRect(115, 115, 20, 20);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "black";
-
-    ctx.beginPath();
-    ctx.moveTo(125,250);
-    ctx.lineTo(125,0);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0,125);
-    ctx.lineTo(250,125);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0,62);
-    ctx.lineTo(250,188);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(62,0);
-    ctx.lineTo(188,250);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(188,0);
-    ctx.lineTo(62,250);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0,188);
-    ctx.lineTo(250,62);
-    ctx.stroke();
-}
-
 function setClock(weatherData, currentHour) {
     const hourIcons = document.getElementsByClassName("hour");
     let currentHourHand = 0;
@@ -218,6 +219,7 @@ function setClock(weatherData, currentHour) {
         }
         iconSelector(weatherData.hourly[i].weather[0].main, hourIcons[j], weatherData.hourly[i].weather[0].description, realCurrentHour);
     }
+    // Creating the hour hand
     const hourHands = {0:[125,0],1:[188,0],2:[250,62],3:[250,125],4:[250,188],5:[188,250],6:[125,250],7:[62,250],8:[0,188],9:[0,125],10:[0,62],11:[62,0]};
     ctx.lineWidth = 10;
     ctx.strokeStyle = "black";
@@ -228,7 +230,6 @@ function setClock(weatherData, currentHour) {
 }
 
 function setAlerts(weatherData) {
-    clearInterval(iconInterval);
     while (alertsUI.firstChild) {
         alertsUI.removeChild(alertsUI.firstChild);
     }
@@ -243,23 +244,8 @@ function setAlerts(weatherData) {
         alertsUI.appendChild(alertDesc);
     };
     alertIcon.classList.remove("hidden");
-    iconInterval = setInterval(() => {
-        setTimeout(() => {
-            alertIcon.classList.toggle("pe-is-w-wind-cone")
-            alertIcon.classList.toggle("pe-is-w-wind-cone-f")
-        }, 500);
-        setTimeout(() => {
-            alertIcon.classList.toggle("pe-is-w-wind-cone-f")
-            alertIcon.classList.toggle("pe-is-w-wind-cone")
-        }, 1000);
-    }, 2000);
 }
 
 function showAlerts() {
-    clearInterval(iconInterval);
     alertsUI.classList.toggle("hidden");
 }
-
-geolocate();
-initialClockDraw();
-    //Fix setting the time of day for hours on the weather clock to set the icons
